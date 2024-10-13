@@ -24,5 +24,15 @@ jobs:
     - name: Install dependencies
       run: yarn install
 
+    - name: Set up Xvfb
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y xvfb
+        Xvfb :99 -screen 0 1920x1080x24 &
+        echo "DISPLAY=:99" >> $GITHUB_ENV
+
+    - name: Run ESLint
+      run: yarn eslint src
+
     - name: Run tests
       run: yarn test
