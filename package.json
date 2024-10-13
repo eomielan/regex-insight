@@ -4,7 +4,7 @@
   "description": "Quickly generate example matches for your regular expressions with ease! This extension allows you to input a regex pattern and instantly receive a variety of matching examples. Perfect for developers looking to test regex patterns or better understand how they work, this tool enhances your productivity and improves your coding workflow.",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.94.0"
+    "vscode": "^1.87.0"
   },
   "categories": [
     "Other"
