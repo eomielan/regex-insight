@@ -4,20 +4,33 @@
   "description": "Quickly generate example matches for your regular expressions with ease! This extension allows you to input a regex pattern and instantly receive a variety of matching examples. Perfect for developers looking to test regex patterns or better understand how they work, this tool enhances your productivity and improves your coding workflow.",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.87.0"
+    "vscode": "^1.70.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:typescript"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "regex-insight.helloWorld",
-        "title": "Hello World"
+    "configuration": {
+      "type": "object",
+      "title": "Regex Insight Settings",
+      "properties": {
+        "regexInsight.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable regex insight functionality."
+        },
+        "regexInsight.highlightColor": {
+          "type": "string",
+          "default": "rgba(255, 215, 0, 0.3)",
+          "description": "Color for highlighting regex patterns."
+        }
       }
-    ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run package",
@@ -45,5 +58,8 @@
     "eslint": "^9.11.1",
     "npm-run-all": "^4.1.5",
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "randexp": "^0.5.3"
   }
 }
