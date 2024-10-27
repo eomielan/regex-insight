@@ -9,15 +9,28 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:typescript"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "regex-insight.helloWorld",
-        "title": "Hello World"
+    "configuration": {
+      "type": "object",
+      "title": "Regex Insight Settings",
+      "properties": {
+        "regexInsight.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable regex insight functionality."
+        },
+        "regexInsight.highlightColor": {
+          "type": "string",
+          "default": "rgba(255, 215, 0, 0.3)",
+          "description": "Color for highlighting regex patterns."
+        }
       }
-    ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run package",
