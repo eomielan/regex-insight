@@ -1,23 +1,26 @@
 import * as vscode from "vscode";
 import RandExp from "randexp";
 
+const regexPattern = /\/(.*?)\//g; // Matches regex literals of the form /pattern/
+
 export function activate(context: vscode.ExtensionContext) {
   const config = vscode.workspace.getConfiguration("regexInsight");
 
-  // Verify extension is enabled
+  // Exit if the extension is disabled
   if (!config.get("enable")) {
     return;
   }
 
-  // Use the highlight color from configuration
+  // Define decoration type using highlight color from configuration
   const highlightColor = config.get("highlightColor", "rgba(255, 215, 0, 0.3)");
   const regexDecorationType = vscode.window.createTextEditorDecorationType({
     backgroundColor: highlightColor,
     border: "1px solid yellow",
   });
 
-  // Register hover provider, document change listener, and active editor change listener
   const supportedLanguages = ["javascript", "typescript"];
+
+  // Register hover provider
   context.subscriptions.push(
     vscode.languages.registerHoverProvider(supportedLanguages, {
       provideHover(document: vscode.TextDocument, position: vscode.Position) {
@@ -31,6 +34,7 @@ export function activate(context: vscode.ExtensionContext) {
     })
   );
 
+  // Register document change listener for highlighting
   context.subscriptions.push(
     vscode.workspace.onDidChangeTextDocument((event) => {
       const editor = vscode.window.activeTextEditor;
@@ -44,6 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
     })
   );
 
+  // Initial highlight for active editor
   const activeEditor = vscode.window.activeTextEditor;
   if (
     activeEditor &&
@@ -52,6 +57,7 @@ export function activate(context: vscode.ExtensionContext) {
     highlightRegexPatterns(activeEditor.document, regexDecorationType);
   }
 
+  // Register listener for active editor change
   context.subscriptions.push(
     vscode.window.onDidChangeActiveTextEditor((editor) => {
       if (editor && supportedLanguages.includes(editor.document.languageId)) {
@@ -62,24 +68,22 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 /**
- * Function to find and highlight regex patterns
- * @param document The text document
- * @param decorationType The decoration type to use for highlighting
+ * Highlights regex patterns in the given document
+ * @param document - The text document
+ * @param decorationType - The decoration type to use for highlighting
  */
 function highlightRegexPatterns(
   document: vscode.TextDocument,
   decorationType: vscode.TextEditorDecorationType
 ) {
   const text = document.getText();
-  const regexPattern = /\/(.*?)\//g; // Match regex literals of the form /pattern/
   const regexRanges: vscode.DecorationOptions[] = [];
 
   let match;
   while ((match = regexPattern.exec(text)) !== null) {
     const startPos = document.positionAt(match.index);
     const endPos = document.positionAt(match.index + match[0].length);
-    const range = new vscode.Range(startPos, endPos);
-    regexRanges.push({ range });
+    regexRanges.push({ range: new vscode.Range(startPos, endPos) });
   }
 
   const editor = vscode.window.activeTextEditor;
@@ -89,9 +93,9 @@ function highlightRegexPatterns(
 }
 
 /**
- * Helper function to get the full range of a regex pattern at a given position
- * @param document The text document
- * @param position The position in the document
+ * Gets the full range of a regex pattern at a given position
+ * @param document - The text document
+ * @param position - The position in the document
  * @returns The range of the regex pattern at the given position
  */
 function getRegexRangeAtPosition(
@@ -100,13 +104,11 @@ function getRegexRangeAtPosition(
 ): vscode.Range | undefined {
   const text = document.getText();
   const offset = document.offsetAt(position);
-  const regexPattern = /\/(.*?)\//g; // Match regex literals of the form /pattern/
 
   let match;
   while ((match = regexPattern.exec(text)) !== null) {
     const start = match.index;
     const end = start + match[0].length;
-
     if (offset >= start && offset <= end) {
       return new vscode.Range(
         document.positionAt(start),
@@ -114,21 +116,20 @@ function getRegexRangeAtPosition(
       );
     }
   }
-
   return undefined;
 }
 
 /**
- * Function to generate an example from a regex string
- * @param regexString The regex string
+ * Generates an example from a regex string
+ * @param regexString - The regex string
  * @returns An example string that matches the regex pattern
  */
 function generateExampleFromRegex(regexString: string): string {
-  const pattern = regexString.slice(1, -1); // Remove leading and trailing slashes
+  const pattern = regexString.slice(1, -1); // Removes leading and trailing slashes
   try {
     const randExp = new RandExp(pattern);
     return randExp.gen();
-  } catch (error) {
+  } catch {
     return "Invalid regex pattern.";
   }
 }
