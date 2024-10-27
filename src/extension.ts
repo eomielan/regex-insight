@@ -98,7 +98,7 @@ function highlightRegexPatterns(
  * @param position - The position in the document
  * @returns The range of the regex pattern at the given position
  */
-function getRegexRangeAtPosition(
+export function getRegexRangeAtPosition(
   document: vscode.TextDocument,
   position: vscode.Position
 ): vscode.Range | undefined {
@@ -124,7 +124,7 @@ function getRegexRangeAtPosition(
  * @param regexString - The regex string
  * @returns An example string that matches the regex pattern
  */
-function generateExampleFromRegex(regexString: string): string {
+export function generateExampleFromRegex(regexString: string): string {
   const pattern = regexString.slice(1, -1); // Removes leading and trailing slashes
   try {
     const randExp = new RandExp(pattern);
