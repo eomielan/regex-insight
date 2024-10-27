@@ -6,11 +6,11 @@ This extension identifies regex patterns used in code, highlights them in yellow
 
 - **Pattern Highlighting:** Automatically identifies and highlights regex patterns in yellow for better visibility.
 
-  ![Pattern Highlighting](images/pattern-highlighting.png)
+  ![Pattern Highlighting](https://github.com/eomielan/regex-insight/raw/main/images/pattern-highlighting.png)
 
 - **Hover Examples:** Provides matching examples for regex patterns when you hover over them, helping users understand the regex functionality.
 
-  ![Hover Examples](images/example-generation.png)
+  ![Hover Examples](https://github.com/eomielan/regex-insight/raw/main/images/example-generation.png)
 
 ## Requirements
 
@@ -31,8 +31,6 @@ This extension contributes the following settings:
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of Regex Insight with basic pattern highlighting and hover examples.
+Initial release of Regex Insight with basic pattern highlighting and hover examples for JavaScript and TypeScript.
