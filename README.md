@@ -14,7 +14,7 @@ This extension identifies regex patterns used in code, highlights them in yellow
 
 ## Requirements
 
-- Visual Studio Code version 1.87.0 or later.
+- Visual Studio Code version 1.70.0 or later.
 - Yarn package manager (install from [Yarn's official website](https://classic.yarnpkg.com/lang/en/docs/install)).
 
 ## Extension Settings
