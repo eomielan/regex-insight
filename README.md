@@ -1,36 +1,36 @@
 # Regex Insight
 
-This extension identifies regex patterns used in code, highlights them in yellow, and quickly generates matching examples when you hover over them.
+Regex Insight helps you work with regex patterns by identifying and highlighting them in your code and providing quick, matching examples on hover.
 
 ## Features
 
-- **Pattern Highlighting:** Automatically identifies and highlights regex patterns in yellow for better visibility.
+- **Pattern Highlighting:** Automatically highlights regex patterns in yellow, making them easy to spot in your code.
 
   ![Pattern Highlighting](https://github.com/eomielan/regex-insight/raw/main/images/pattern-highlighting.png)
 
-- **Hover Examples:** Provides matching examples for regex patterns when you hover over them, helping users understand the regex functionality.
+- **Hover Examples:** Displays example matches for regex patterns when you hover, making regex functionality easier to understand.
 
   ![Hover Examples](https://github.com/eomielan/regex-insight/raw/main/images/example-generation.png)
 
 ## Requirements
 
-- Visual Studio Code version 1.70.0 or later.
-- Yarn package manager (install from [Yarn's official website](https://classic.yarnpkg.com/lang/en/docs/install)).
+- Visual Studio Code **version 1.70.0 or later**
+- Yarn package manager (install from [Yarn's official website](https://classic.yarnpkg.com/lang/en/docs/install))
 
-## Extension Settings
+## Settings
 
-This extension contributes the following settings:
+Regex Insight provides these configuration options:
 
-- `regexInsight.enable`: Enable/disable regex insight functionality.
-- `regexInsight.highlightColor`: Customize the color used for highlighting regex patterns (default is yellow).
+- `regexInsight.enable`: Enable or disable regex highlighting and hover functionality.
+- `regexInsight.highlightColor`: Customize the highlight color for regex patterns (default is yellow).
 
 ## Known Issues
 
-- Highlighting may not work correctly with multi-line regex patterns.
-- Some edge cases in complex regex patterns may not generate accurate examples.
+- Limited support for multi-line regex patterns.
+- Some complex regex patterns may not generate accurate examples.
 
 ## Release Notes
 
-### 1.0.0
+### 0.0.1
 
-Initial release of Regex Insight with basic pattern highlighting and hover examples for JavaScript and TypeScript.
+Initial release with basic regex pattern highlighting and hover-based example generation for JavaScript and TypeScript.
